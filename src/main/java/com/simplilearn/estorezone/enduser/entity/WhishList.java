@@ -1,4 +1,4 @@
-package com.simplilearn.estorezone.enduser.model;
+package com.simplilearn.estorezone.enduser.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,2 +1,14 @@
 server:
   port: 9070
+spring:
+  application:
+    name: estore-zone-service    
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/estore_zone_db    
+    username: devuser
+    password: DevUser!74#
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

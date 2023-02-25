@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.simplilearn.estorezone.admin.model.Users;
+import com.simplilearn.estorezone.admin.entity.Users;
 
 @RestController
 public class HomeController {

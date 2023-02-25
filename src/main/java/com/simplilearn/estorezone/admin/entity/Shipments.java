@@ -1,4 +1,4 @@
-package com.simplilearn.estorezone.admin.model;
+package com.simplilearn.estorezone.admin.entity;
 
 import java.util.Date;
 
