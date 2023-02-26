@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +19,8 @@ import com.simplilearn.estorezone.admin.dto.ResponseDto;
 import com.simplilearn.estorezone.admin.entity.Products;
 import com.simplilearn.estorezone.admin.repository.ProductsRepository;
 
-@RestController("/v1/products")
+@RestController()
+@RequestMapping("/products")
 public class ProductsController {
 
 	@Autowired
@@ -29,7 +32,7 @@ public class ProductsController {
 	 * @return
 	 */
 	@GetMapping("")
-	public List<Products> getAll(@RequestParam("title") String title) {
+	public List<Products> getAll(@RequestParam(value="title", required =false) String title) {
 		if (title != null && title != "") {
 			return productsRepository.findByProductTitleContaining(title);
 		}
@@ -42,7 +45,8 @@ public class ProductsController {
 	 * @return
 	 */
 	@GetMapping("/{productId}")
-	public Optional<Products> getOne(@RequestParam("id") int productId) {
+	// @RequestMapping(value="/{productId}", method = RequestMethod.GET)
+	public Optional<Products> getOne(@PathVariable("productId") int productId) {
 		return productsRepository.findById(productId);
 	}
 
@@ -76,7 +80,7 @@ public class ProductsController {
 	 * @return Optional<Products>
 	 */
 	@DeleteMapping("/{productId}")
-	public ResponseDto deleteOne(@RequestParam("id") int productId) {
+	public ResponseDto deleteOne(@PathVariable("productId") int productId) {
 		boolean eixts = productsRepository.existsById(productId);
 		if (eixts) {
 			productsRepository.deleteById(productId);

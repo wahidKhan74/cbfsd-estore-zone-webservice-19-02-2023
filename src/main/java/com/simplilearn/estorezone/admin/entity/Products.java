@@ -37,20 +37,20 @@ public class Products {
 	@Column(name="productCode")
 	private String productCode;
 	
-	@ElementCollection
-	@CollectionTable(name="images", joinColumns = @JoinColumn(name="id"))
-	@Column(name="list")
-	private List<String> images;
+//	@ElementCollection
+//	@CollectionTable(name="images", joinColumns = @JoinColumn(name="id"))
+//	@Column(name="list")
+//	private List<String> images;
 	
 	@Column(name="thumbnailImage")
 	private int thumbnailImage;
 	
 	@Column(name="price")
-	private int price;
+	private double price;
 	
 	@Column(name="addedOn")
-	private Date addedOn;
+	private Date addedOn = new Date();
 	
 	@Column(name="rating")
-	private int rating;
+	private double rating;
 }
