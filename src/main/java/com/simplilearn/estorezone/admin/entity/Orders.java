@@ -26,7 +26,7 @@ public class Orders {
 	private int orderId;
 	
 	@Column(name="orderDate")
-	private Date orderDate;
+	private Date orderDate = new Date();
 	
 	@Column(name="orderStatus")
 	private String orderStatus;

@@ -1,18 +1,23 @@
-package com.simplilearn.estorezone.admin.repository;
+package com.simplilearn.estorezone.admin.service;
 
-
+import java.util.Optional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.simplilearn.estorezone.admin.entity.Products;
 
-@Repository
-public interface ProductsRepository extends JpaRepository<Products, Integer>{
+public interface ProductsService {
 
 	Page<Products> findByProductTitleContaining(String title, Pageable pageable);
 
 	Page<Products> findAll(Pageable pageable);
+
+	Optional<Products> findById(int productId);
+
+	Products save(Products products);
+
+	boolean existsById(int productId);
+
+	void deleteById(int productId);
 
 }

@@ -32,7 +32,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1677429717484,
+			"time": 1678033343464,
 			"name": "Delete a product",
 			"description": "",
 			"collectionId": "79daca1f-63af-c56e-944d-2657276cdb47",
@@ -42,8 +42,30 @@
 			"id": "3f5a23be-d472-2e44-205a-92336722b4f9",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:9070/estore-zone-service/api/v1/products",
-			"queryParams": [],
+			"url": "http://localhost:9070/estore-zone-service/api/v1/products?page=0&size=5&sort=productId,DESC",
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "size",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sort",
+					"value": "productId,DESC",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
@@ -54,7 +76,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1677428356934,
+			"time": 1678035181049,
 			"name": "Get all products",
 			"description": "",
 			"collectionId": "79daca1f-63af-c56e-944d-2657276cdb47",
@@ -64,7 +86,7 @@
 			"id": "59a4b643-b2aa-8421-bf1d-9a63afb2f598",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:9070/estore-zone-service/api/v1/products/1",
+			"url": "http://localhost:9070/estore-zone-service/api/v1/products/12",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -76,7 +98,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1677429098466,
+			"time": 1678033341101,
 			"name": "Get one product",
 			"description": "",
 			"collectionId": "79daca1f-63af-c56e-944d-2657276cdb47",
@@ -116,11 +138,32 @@
 			"id": "80001f67-3a3e-2aa8-c7b6-2115a5fc7656",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:9070/estore-zone-service/api/v1/products?title=apple",
+			"url": "http://localhost:9070/estore-zone-service/api/v1/products?title=h&page=1&size=5&sort=productId,DESC",
 			"queryParams": [
 				{
 					"key": "title",
-					"value": "apple",
+					"value": "h",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "size",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sort",
+					"value": "productId,DESC",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -136,7 +179,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1677429215112,
+			"time": 1678035284031,
 			"name": "Search product by title",
 			"description": "",
 			"collectionId": "79daca1f-63af-c56e-944d-2657276cdb47",
@@ -165,12 +208,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1677428931471,
+			"time": 1678035322788,
 			"name": "Create a product",
 			"description": "",
 			"collectionId": "79daca1f-63af-c56e-944d-2657276cdb47",
 			"responses": [],
-			"rawModeData": "{\n\t\"productTitle\": \"LG OLED55C1XTZ 55 Inch LED 4K, 3840 X 2160 Pixels TV\",\n\t\"productDescription\":\"Television, Remote Control, Batteries, Wall Mount, User Manual & Warranty Card\",\n\t\"productCode\": \"LGTV001234\",\n\t\"thumbnailImage\" : 4,\n\t\"price\": 454667,\n\t\"rating\": 4.0\n}"
+			"rawModeData": "{\n\t\"productTitle\": \"HP OLED55C1XTZ 55 Inch LED 4K, 3840 X 2160 Pixels Laptop\",\n\t\"productDescription\":\"Laptop, Remote Control, Batteries, Wall Mount, User Manual & Warranty Card\",\n\t\"productCode\": \"AP001234\",\n\t\"thumbnailImage\" : 4,\n\t\"price\": 454667,\n\t\"rating\": 4.0\n}"
 		}
 	]
 }

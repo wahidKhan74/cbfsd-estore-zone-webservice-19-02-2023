@@ -1,10 +1,11 @@
 package com.simplilearn.estorezone.controller;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,26 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.simplilearn.estorezone.admin.dto.ResponseDto;
 import com.simplilearn.estorezone.admin.entity.Products;
-import com.simplilearn.estorezone.admin.repository.ProductsRepository;
+import com.simplilearn.estorezone.admin.service.ProductsService;
+import com.simplilearn.estorezone.exceptions.NotFoundException;
 
 @RestController()
 @RequestMapping("/products")
 public class ProductsController {
 
 	@Autowired
-	ProductsRepository productsRepository;
-
+	ProductsService productService;
+	
 	/**
 	 * Get all products or Search product by title like operation.
 	 * @param title
 	 * @return
 	 */
 	@GetMapping("")
-	public List<Products> getAll(@RequestParam(value="title", required =false) String title) {
+	public Page<Products> getAll(@RequestParam(value="title", required =false) String title, Pageable pageable) {
 		if (title != null && title != "") {
-			return productsRepository.findByProductTitleContaining(title);
+			return productService.findByProductTitleContaining(title, pageable);
 		}
-		return productsRepository.findAll();
+		return productService.findAll(pageable);
 	}
 
 	/**
@@ -47,7 +49,11 @@ public class ProductsController {
 	@GetMapping("/{productId}")
 	// @RequestMapping(value="/{productId}", method = RequestMethod.GET)
 	public Optional<Products> getOne(@PathVariable("productId") int productId) {
-		return productsRepository.findById(productId);
+		Optional<Products> productData=  productService.findById(productId);
+		if(productData.isPresent()) {
+			return productData;
+		}
+		throw new NotFoundException("Products does exist with productId '"+ productId +"'");
 	}
 
 	/**
@@ -57,7 +63,7 @@ public class ProductsController {
 	 */
 	@PostMapping("")
 	public Products save(@RequestBody Products products) {
-		return productsRepository.save(products);
+		return productService.save(products);
 	}
 
 	/**
@@ -67,11 +73,11 @@ public class ProductsController {
 	 */
 	@PutMapping("")
 	public Products udpate(@RequestBody Products products) {
-		boolean eixts = productsRepository.existsById(products.getProductId());
+		boolean eixts = productService.existsById(products.getProductId());
 		if (eixts) {
-			return productsRepository.save(products);
+			return productService.save(products);
 		}
-		throw new RuntimeException("Product does not exits");
+		throw new NotFoundException("Products does exist with productId '"+ products.getProductId() +"'");
 	}
 
 	/**
@@ -81,11 +87,11 @@ public class ProductsController {
 	 */
 	@DeleteMapping("/{productId}")
 	public ResponseDto deleteOne(@PathVariable("productId") int productId) {
-		boolean eixts = productsRepository.existsById(productId);
+		boolean eixts = productService.existsById(productId);
 		if (eixts) {
-			productsRepository.deleteById(productId);
+			productService.deleteById(productId);
 			return new ResponseDto("Success","Product deleted", new Date(), null);
 		}
-		throw new RuntimeException("Product does not exits");
+		throw new NotFoundException("Products does exist with productId '"+ productId +"'");
 	}
 }
