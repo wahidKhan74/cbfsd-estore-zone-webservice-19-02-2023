@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simplilearn.estorezone.admin.dto.ResponseDto;
-import com.simplilearn.estorezone.admin.entity.Admins;
-import com.simplilearn.estorezone.admin.service.AdminsService;
+import com.simplilearn.estorezone.enduser.entity.Users;
+import com.simplilearn.estorezone.enduser.service.UsersService;
 import com.simplilearn.estorezone.exceptions.AlreadyExistException;
 import com.simplilearn.estorezone.exceptions.NotFoundException;
 
 @RestController
-@RequestMapping("/admins")
-public class AdminsController {
+@RequestMapping("/users")
+public class UsersController {
 	
 	@Autowired
-	AdminsService adminService;
+	UsersService userService;
 	
 	/**
 	 * Get all or search by email.
@@ -35,55 +35,55 @@ public class AdminsController {
 	 * @return
 	 */
 	@GetMapping("")
-	public Page<Admins> getAll(@RequestParam(value="email", required = false) String email,
+	public Page<Users> getAll(@RequestParam(value="email", required = false) String email,
 			Pageable pageable) {
 		if(email!=null) {
-			return adminService.findByEmailContaining(email,pageable);
+			return userService.findByEmailContaining(email,pageable);
 		}
-		return adminService.findAll(pageable);
+		return userService.findAll(pageable);
 	}
 
 	/**
-	 * Get admin user by id
+	 * Get user user by id
 	 * @param id
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Optional<Admins> getOne(@PathVariable("id") int id) {
-		Optional<Admins> adminData = adminService.findById(id);
-		if(adminData.isPresent()) {
-			return adminData;
+	public Optional<Users> getOne(@PathVariable("id") int id) {
+		Optional<Users> userData = userService.findById(id);
+		if(userData.isPresent()) {
+			return userData;
 		}
-		throw new NotFoundException("Admins data does exist with id '"+ id +"'");
+		throw new NotFoundException("Users data does exist with id '"+ id +"'");
 	}
 	
 	/**
-	 * Create admin user.
-	 * @param adminsReq
+	 * Create user user.
+	 * @param usersReq
 	 * @return
 	 */
 	@PostMapping("")
-	public Admins save(@RequestBody() Admins adminsReq) {
-		boolean eixts = adminService.existsByEmail(adminsReq.getEmail());
+	public Users save(@RequestBody() Users usersReq) {
+		boolean eixts = userService.existsByEmail(usersReq.getEmail());
 		if (!eixts) {
-			return adminService.save(adminsReq);
+			return userService.save(usersReq);
 		}
-		throw new AlreadyExistException("Admin user already exist with email '"+adminsReq.getEmail() +"'");
+		throw new AlreadyExistException("User already exist with email '"+usersReq.getEmail() +"'");
 	}
 	
 
 	/**
-	 * Update Admins
-	 * @param Admins
+	 * Update Users
+	 * @param Users
 	 * @return
 	 */
 	@PutMapping("")
-	public Admins udpate(@RequestBody Admins admins) {
-		boolean eixts = adminService.existsById(admins.getAdminId());
+	public Users udpate(@RequestBody Users users) {
+		boolean eixts = userService.existsById(users.getUserId());
 		if (eixts) {
-			return adminService.save(admins);
+			return userService.save(users);
 		}
-		throw new NotFoundException("Admin user does exist with id '"+ admins.getAdminId() +"'");
+		throw new NotFoundException("User does exist with id '"+ users.getUserId() +"'");
 	}
 
 	/**
@@ -93,11 +93,11 @@ public class AdminsController {
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseDto deleteOne(@PathVariable("id") int id) {
-		boolean eixts = adminService.existsById(id);
+		boolean eixts = userService.existsById(id);
 		if (eixts) {
-			adminService.deleteById(id);
-			return new ResponseDto("Success","Admin user deleted", new Date(), null);
+			userService.deleteById(id);
+			return new ResponseDto("Success","User deleted", new Date(), null);
 		}
-		throw new NotFoundException("Admin user does exist with id '"+ id +"'");
+		throw new NotFoundException("User does exist with id '"+ id +"'");
 	}
 }
