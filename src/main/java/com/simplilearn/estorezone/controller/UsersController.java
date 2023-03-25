@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.simplilearn.estorezone.admin.dto.LoginReqDto;
 import com.simplilearn.estorezone.admin.dto.ResponseDto;
 import com.simplilearn.estorezone.enduser.entity.Users;
 import com.simplilearn.estorezone.enduser.service.UsersService;
@@ -99,5 +100,25 @@ public class UsersController {
 			return new ResponseDto("Success","User deleted", new Date(), null);
 		}
 		throw new NotFoundException("User does exist with id '"+ id +"'");
+	}
+	
+	/**
+	 * Validate Login for admin user.
+	 * @param adminsReq
+	 * @return
+	 */
+	@PostMapping("/login")
+	public ResponseDto save(@RequestBody() LoginReqDto loginReqDto) {
+		boolean eixts = userService.existsByEmail(loginReqDto.getEmail());
+		if (eixts) {
+			boolean match = userService.login(loginReqDto);
+			Users user = userService.findByEmail(loginReqDto.getEmail());
+			if(match) {
+				return new ResponseDto("Success","User login successfull", new Date(), user); 
+			}else {
+				throw new NotFoundException("Invalid password, password mismatch error.");
+			}
+		}
+		throw new NotFoundException("Admin user does exist with email '"+loginReqDto.getEmail() +"'");
 	}
 }
