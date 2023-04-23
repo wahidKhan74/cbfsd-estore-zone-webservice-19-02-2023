@@ -1,0 +1,19 @@
+# Step 1: Pull MySQL Image
+- docker pull mysql
+
+# Step 2: Create a docker network to communicate Spring boot application and MySQL database
+-docker network create springboot-mysql-net
+
+- docker network ls
+
+# Step 3: Run MySQL image in a docker container in the same network
+- docker run --name mysqldb --network springboot-mysql-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=employeedb -d mysql
+
+Step 4: Access the MySQL database in a container
+- docker exec -it mysqldb bash
+
+# Step 5: Deploy Spring Boot Application in a Docker Container
+
+- docker container run --network springboot-mysql-net -p 9070:9070 --name estorezone-webservice-container -d estorezone-webservice
+
+
