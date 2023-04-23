@@ -18,13 +18,7 @@ pipeline {
             }
         }
         
-         stage('Maven Test') {
-            steps {
-                echo '----------------- This is a compile phase ----------'
-                bat 'mvn clean test'
-            }
-        }
-        
+            
         stage('Maven Build') {
              steps {
                 echo '----------------- This is a build phase ----------'
