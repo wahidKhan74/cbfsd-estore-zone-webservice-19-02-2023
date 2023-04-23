@@ -45,7 +45,7 @@ pipeline {
             steps {
                 echo '----------------- This is a docker deploment phase ----------'
                 bat '''
-            		docker container run --restart always --name estorezone-webservice-container -p 9070:9070 -d estorezone-webservice
+            		docker container run --restart always --name estorezone-webservice-container -p 9070:9070 -d estorezone-webservice  --net host container
             	'''
             }
         }
