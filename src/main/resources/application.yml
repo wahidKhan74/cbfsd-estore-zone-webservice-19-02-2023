@@ -7,7 +7,7 @@ spring:
     name: estore-zone-service    
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/estore_zone_db    
+    url: jdbc:mysql://mysqldb:3306/estore_zone_db    
     username: root
     password: root
   jpa:
