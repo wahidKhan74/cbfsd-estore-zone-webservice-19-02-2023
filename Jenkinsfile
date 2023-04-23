@@ -45,7 +45,7 @@ pipeline {
             steps {
                 echo '----------------- This is a docker deploment phase ----------'
                 bat '''
-            		docker container run  -tid -v $(pwd):/code -p 3306:3306 -p 9070:9070 --name estorezone-webservice-container -d estorezone-webservice --net host container
+            		docker container run -p 9070:9070 --name estorezone-webservice-container -d estorezone-webservice --net host container
             	'''
             }
         }
