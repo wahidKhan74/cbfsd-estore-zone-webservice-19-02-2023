@@ -11,6 +11,7 @@ spring:
     username: root
     password: root
   jpa:
+    database: mysql
     hibernate:
       ddl-auto: update
       naming:
@@ -18,4 +19,4 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: false
 hibernate:
-  dialect: org.hibernate.dialect.MySQLDialect
+  dialect: org.hibernate.dialect.MySQL5Dialect
