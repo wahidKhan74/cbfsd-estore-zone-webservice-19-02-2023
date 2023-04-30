@@ -22,14 +22,14 @@ pipeline {
         stage('Maven Build') {
              steps {
                 echo '----------------- This is a build phase ----------'
-                bat 'mvn clean package -DskipTests'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Docker Build') {
             steps {
                 echo '----------------- This is a build docker image phase ----------'
-                bat '''
+                sh '''
                     docker image build -t estorezone-webservice .
                 '''
             }
@@ -38,7 +38,7 @@ pipeline {
         stage('Docker Deploy') {
             steps {
                 echo '----------------- This is a docker deploment phase ----------'
-                bat '''
+                sh '''
             		docker container run --network springboot-mysql-net -p 9070:9070 --name estorezone-webservice-container -d estorezone-webservice
             	'''
             }
