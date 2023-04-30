@@ -39,7 +39,13 @@ pipeline {
             steps {
                 echo '----------------- This is a docker deploment phase ----------'
                 sh '''
-            		docker container run --network springboot-mysql-net -p 9070:9070 --name estorezone-webservice-container -d estorezone-webservice
+                (if  [ $(docker ps -a | grep estorezone-webservice-container | cut -d " " -f1) ]; then \
+                        echo $(docker rm -f estorezone-webservice-container); \
+                        echo "---------------- successfully estorezone-webservice-container ----------------"
+                     else \
+                    echo OK; \
+                 fi;);
+            	docker container run --network springboot-mysql-net -p 9070:9070 --name estorezone-webservice-container -d estorezone-webservice
             	'''
             }
         }
