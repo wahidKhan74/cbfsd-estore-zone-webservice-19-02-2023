@@ -13,7 +13,6 @@ Step 4: Access the MySQL database in a container
 - docker exec -it mysqldb bash
 
 # Step 5: Deploy Spring Boot Application in a Docker Container
-
 - docker container run --network springboot-mysql-net -p 9070:9070 --name estorezone-webservice-container -d estorezone-webservice
 
 
